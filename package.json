@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/mariusailisoaie/web-scraping-puppeteer/issues"
   },
-  "homepage": "https://github.com/mariusailisoaie/web-scraping-puppeteer#readme"
+  "homepage": "https://github.com/mariusailisoaie/web-scraping-puppeteer#readme",
+  "dependencies": {
+    "puppeteer": "^1.14.0"
+  }
 }
