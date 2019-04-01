@@ -5,7 +5,9 @@ const puppeteer = require('puppeteer');
   const page = await browser.newPage();
   await page.setViewport({width: 1920, height: 1080});
   await page.goto('https://addictedcoder.com', {waitUntil: 'networkidle2'});
-  await page.screenshot({path: './screenshots/myPage.png', fullPage: true});
+  // await page.screenshot({path: './screenshots/myPage.png', fullPage: true});
+  const html = await page.content();
+  console.log(html);
 
   await browser.close();
 })();
