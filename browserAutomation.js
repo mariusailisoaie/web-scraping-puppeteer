@@ -1,9 +1,10 @@
 const puppeteer = require('puppeteer');
 const lib = require('./screenshots/lib');
+const moment = require('moment');
 
 (async () => {
-  // let browser = await puppeteer.launch({headless: false, slowMo: 100, args: ['--start-maximized']});
-  let browser = await puppeteer.launch();
+  let browser = await puppeteer.launch({headless: false, args: ['--start-maximized']});
+  // let browser = await puppeteer.launch();
   let page = await browser.newPage();
   await page.setViewport({width: 1920, height: 1080});
   await page.goto(lib.string2, {waitUntil: 'networkidle2'});
@@ -28,12 +29,19 @@ const lib = require('./screenshots/lib');
     return docNumber = Array.from(document.querySelectorAll('#panel-395-1-0-0 > div > ul > li:nth-child(2) > ul > li > ul')[0].children).map(li => li.innerHTML.split("'")[1]);
   });
 
+  const minutesArray = [];
+
   for (let i = 0; i < docsNo.length; i++) {
     await page.goto(`${lib.string7}${docsNo[i]}`, {waitUntil: 'domcontentloaded'});
     let time = await page.$eval('body > div > table > tbody > tr:nth-child(9) > td > table > tbody > tr:nth-child(2) > td:nth-child(1)', el => el.innerText);
     time = time.split(' ')[6];
-    console.log(time);
+    const timeAsMinutes = moment.duration(time, 'm').asMinutes();
+    minutesArray.push(timeAsMinutes);
   }
+  console.log(minutesArray);
+  console.log('minutesArray.length -> ', minutesArray.length);
+  console.log('total minutes ->', minutesArray.reduce((a, b) => a + b));
+  console.log('time as hours ->', minutesArray.reduce((a, b) => a + b) / 60);
 
   // await page.waitFor(500);
   // await page.screenshot({path: './screenshots/omdeler.png', fullPage: true});
