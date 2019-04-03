@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/mariusailisoaie/web-scraping-puppeteer#readme",
   "dependencies": {
+    "moment": "^2.24.0",
     "puppeteer": "^1.14.0"
   }
 }
